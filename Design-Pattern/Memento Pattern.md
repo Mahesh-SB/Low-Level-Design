@@ -32,3 +32,108 @@ class Document {
 }
 ```
 Now, any external code can read and change the content directly using GetContent() or SetContent(). This breaks encapsulation because the internal data is no longer protected.
+
+### 📝 Use Case: Text Editor with Undo Feature
+We want to:
+- Allow the user to type into a text editor.
+- Save the current state.
+- Undo changes and return to the previous state.
+But we want to hide the internal structure of the Editor class (e.g., formatting rules, internal data structures).
+
+### ✅ Memento Pattern C# Implementation
+
+```
+using System;
+using System.Collections.Generic;
+
+#region Memento
+// Memento: Captures internal state
+class EditorMemento
+{
+    public string Content { get; }
+
+    public EditorMemento(string content)
+    {
+        Content = content;
+    }
+}
+#endregion
+
+#region Originator
+// Originator: The main object whose state we want to save/restore
+class Editor
+{
+    private string _content = "";
+
+    public void Type(string words)
+    {
+        _content += words;
+    }
+
+    public void ShowContent()
+    {
+        Console.WriteLine("Editor Content: " + _content);
+    }
+
+    public EditorMemento Save()
+    {
+        return new EditorMemento(_content);
+    }
+
+    public void Restore(EditorMemento memento)
+    {
+        _content = memento.Content;
+    }
+}
+#endregion
+
+#region Caretaker
+// Caretaker: Manages the history of mementos
+class History
+{
+    private Stack<EditorMemento> _history = new Stack<EditorMemento>();
+
+    public void Backup(EditorMemento memento)
+    {
+        _history.Push(memento);
+    }
+
+    public EditorMemento Undo()
+    {
+        if (_history.Count > 0)
+            return _history.Pop();
+        return null;
+    }
+}
+#endregion
+
+#region Demo
+// Demo
+class Program
+{
+    static void Main()
+    {
+        var editor = new Editor();
+        var history = new History();
+
+        editor.Type("Hello ");
+        history.Backup(editor.Save());  // Save point 1
+
+        editor.Type("World!");
+        history.Backup(editor.Save());  // Save point 2
+
+        editor.Type(" This is final.");
+        editor.ShowContent(); // Output: Hello World! This is final.
+
+        Console.WriteLine("\n-- Undo once --");
+        editor.Restore(history.Undo());
+        editor.ShowContent(); // Output: Hello World!
+
+        Console.WriteLine("\n-- Undo twice --");
+        editor.Restore(history.Undo());
+        editor.ShowContent(); // Output: Hello
+    }
+}
+#endregion
+
+```
