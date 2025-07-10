@@ -1,5 +1,5 @@
 
-# Memento : Creational Pattern
+# Memento : Behavioral Pattern
 The Memento Pattern solves the problem of saving and restoring the internal state of an object without violating its encapsulation.
 
 ## 🔧 Problem It Solves
