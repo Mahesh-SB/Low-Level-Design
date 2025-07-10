@@ -21,7 +21,7 @@ Reflection-based code is often less readable and less intuitive than regular cod
 It’s harder for developers (including future-you) to follow what’s happening.
 
 4. **Security Risks**
-Reflection can access private members if allowed, which breaks encapsulation and can lead to unintended side effects.
+Reflection can access private members if allowed, which breaks **encapsulation** and can lead to unintended side effects.
 Improper use may expose sensitive parts of your code.
   
   ### ⚠️ Example : 
