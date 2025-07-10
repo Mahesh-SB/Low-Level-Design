@@ -25,7 +25,7 @@ Reflection can access private members if allowed, which breaks encapsulation and
 Improper use may expose sensitive parts of your code.
   
   ## ⚠️ Example : 
-  Accessing and Modifying a Private Field, one the major reason not to use reflection
+  🚨 Dangerous! Accessing and Modifying a Private Field, one the major reason not to use reflection
   ```
   using System;
 using System.Reflection;
