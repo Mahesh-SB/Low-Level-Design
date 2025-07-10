@@ -69,3 +69,5 @@ Despite these drawbacks, reflection has valid use cases, especially when:
 - You're building frameworks, serialization libraries, or dependency injection containers (like ASP.NET Core does internally).
 - You need to dynamically load plugins or types (e.g., from DLLs).
 - You don’t know the type at compile time but must work with it.
+
+Note : All the information shared in this article is based on my personal research and the questions that arose during my learning process. I encourage you to explore further and form your own conclusions — and I’d love to hear your thoughts or insights as well.
